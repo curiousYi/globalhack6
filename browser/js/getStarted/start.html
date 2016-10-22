@@ -1,12 +1,12 @@
 <div>
     <h2>Let's get started!</h2>
-    <form onSubmit="checkDB()" class="getName">What is your name and DOB?
+    <form ng-submit="checkDB(person)">What is your name and DOB?
         <label for="firstName">First Name: </label>
         <input type="text" ng-model="person.firstName">
         <label for="lastName">Last Name: </label>
         <input type="text" ng-model="person.lastName">
-        <label for="bday">Last Name: </label>
-        <input type="text" ng-model="person.bday">
+        <label for="DOB">DOB: </label>
+        <input type="text" ng-model="person.DOB">
         <button type="submit">Check if I'm in the system already</button>
     </form>
 </div>

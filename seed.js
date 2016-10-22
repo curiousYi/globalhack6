@@ -50,7 +50,7 @@ var seedClients = function () {
             firstName: 'John',
             lastName: 'Doe',
             SSN: 111223333,
-            DOB: '1940-12-30',
+            DOB: '1940',
             gender: '1',
             race: '2',
             veteranStatus: true,

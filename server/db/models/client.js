@@ -16,7 +16,7 @@ module.exports = db.define('client', {
         type: Sequelize.INTEGER
     },
     DOB: {
-        type: Sequelize.DATEONLY
+        type: Sequelize.STRING
     },
     gender: {
         type: Sequelize.ENUM('0', '1', '2', '3', '4', '8', '9', '99')
