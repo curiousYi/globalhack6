@@ -20,7 +20,7 @@ app.controller('FormController', function($scope, $http){
     }
 
         $scope.getSocialCert = function(){
-        $http.get('/api/forms/birth-certificate', {responseType: 'arraybuffer'})
+        $http.get('/api/forms/social-security', {responseType: 'arraybuffer'})
         .success(function(data){
             var file = new Blob([data], {type: 'application/pdf'})
             var fileURL = URL.createObjectURL(file);
