@@ -35,7 +35,7 @@ return new Date((excelDate - (25567 + 2))*86400*1000);
 allClientData.forEach(client => {
   if(client.UUID == 90077){
     clientObj = client;
-    console.log(client);
+    // console.log(client);
   }
 })
 // console.log(clientObj);
@@ -45,7 +45,7 @@ pdfFillForm.read('ss-5.pdf')
 .then(res => {
   // console.log(res);
   res.forEach(field => {
-    // console.log(field.name);
+    console.log(field.name);
     // for each field in the pdf form, look in the database to see if there's relevant info
     if(field.name.toLowerCase().search(/(?=.*mother)(?=.*first)(?=.*name)/) > -1){
       if(clientObj.Mother_First_Name){
@@ -147,8 +147,6 @@ pdfFillForm.read('ss-5.pdf')
     }
     else if(field.name.toLowerCase().search(/(?=.*gender\[0\])/) > -1){
       pdfFillObj[field.name] = true;
-      field.value = true;
-      console.log(field)
     }
 
     // console.log(pdfFillObj);
