@@ -15,8 +15,7 @@ var ensureAuthenticated = function (req, res, next) {
 
 router.get('/birth-certificate', ensureAuthenticated, function (req, res, next) {
 
-    var tempFile = '/Users/yichao/Desktop/globalhack6/public/govFormTemplates/birth-certificate.pdf'
-
+    var tempFile = __dirname + '/govFormTemplates/birth-certificate.pdf'
     fs.readFile(tempFile, function(err, data){
         if (err) return next(err);
         res.contentType('application/pdf');
@@ -27,8 +26,7 @@ router.get('/birth-certificate', ensureAuthenticated, function (req, res, next) 
 
 router.get('/social-security', ensureAuthenticated, function (req, res, next) {
 
-    var tempFile = '/Users/yichao/Desktop/globalhack6/public/govFormTemplates/social-security.pdf'
-
+    var tempFile = __dirname + '/govFormTemplates/social-security.pdf'
     fs.readFile(tempFile, function(err, data){
         if (err) return next(err);
         res.contentType('application/pdf');
