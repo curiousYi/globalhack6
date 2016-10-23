@@ -9,7 +9,7 @@ app.config(function ($stateProvider) {
 app.controller('StartCtrl', function($scope, $http){
 
     $scope.options = [
-        {value: '', lable: 'choose one'},
+        {value: '', label: 'choose one'},
         {value: true, label: 'true'}, 
         {value: false, label: 'false'}
     ];
@@ -28,19 +28,18 @@ app.controller('StartCtrl', function($scope, $http){
         if ($scope.needsPost) {
             $http.post('api/clients', information)
             .then(function(person){
-                console.log('newly added person', person)
+                $scope.updatedPerson = person.data;
             })
         } else {
             $http.put('api/clients', information)
             .then(function(person){
-                console.log('newly updated person', person)
+                $scope.updatedPerson = person.data;
             })
         }
-
+        $scope.showForms = true; 
     };
 
     $scope.checkDB = function(person){
-        //check db for name
         $http.get('/api/clients', {
             params: {
                 firstName: person.firstName, 
@@ -49,20 +48,17 @@ app.controller('StartCtrl', function($scope, $http){
             }
         })
         .then(function(person){
-        //if person is in db, have them double check their existing info
-            if (person){
+            if (person.data.id){
                 $scope.currentPerson = person.data;
-                $scope.isCurrentPerson = true;
-                $scope.needsPost = false; 
+                $scope.needsPut = true; 
             } else {
                 $scope.needsPost = true; 
             }
+            $scope.isCurrentPerson = true;
         })
         .catch(function(error){
             console.error("ERR", error)
         })
-
-        //if person is NOT in db, have them enter basic info
-        // proceed to instructions for obtaining any missing documentation
     }
+
 })
