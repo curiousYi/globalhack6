@@ -25,11 +25,11 @@ function getJsDateFromExcel(excelDate) {
 // look up data via UUID
 // hard code 90077 for now
 allClientData.forEach(client => {
-  if(client.First_Name == firstName && client.Last_Name == lastName && client.DOB == DOB){
+  if(client.First_Name == firstName && client.Last_Name == lastName){
     clientObj = client;
   }
 })
-// console.log(clientObj);
+console.log(clientObj);
 
 // reading data
 return pdfFillForm.read(__dirname + '/govFormTemplates/birthdeathwithTextFields.pdf')

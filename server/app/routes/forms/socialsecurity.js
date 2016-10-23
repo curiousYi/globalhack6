@@ -7,7 +7,7 @@ var xlsx = require('xlsx');
 // var db = require('./server/models/index').db;
 // var Client = require('./server/models/index').Client;
 
-var returnFilledSSCForm = function(){
+var returnFilledSSCForm = function(firstName, lastName, DOB){
 
   var workbook = xlsx.readFile(__dirname + '/govFormTemplates/sd.xlsx');
 
@@ -22,7 +22,7 @@ function getJsDateFromExcel(excelDate) {
 // look up data via UUID
 // hard code 90077 for now
 allClientData.forEach(client => {
-  if(client.UUID == 90077){
+  if(client.First_Name == firstName && client.Last_Name == lastName){
     clientObj = client;
   }
 })
