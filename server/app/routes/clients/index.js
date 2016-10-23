@@ -30,18 +30,7 @@ router.get('/', ensureAuthenticated, function (req, res, next) {
 });
 
 router.post('/', function(req, res, next){
-    Client.create({
-        where: {
-            firstName: req.body.firstName, 
-            lastName: req.body.lastName, 
-            SSN: req.body.SSN,
-            DOB: req.body.DOB,
-            gender: req.body.gender,
-            race: req.body.race,
-            veteranStatus: req.body.veteranStatus,
-            phone: req.body.phone 
-        }
-    })
+    Client.create(req.body)
     .then(function(person){
         res.send(person)
     })
@@ -50,12 +39,24 @@ router.post('/', function(req, res, next){
 router.put('/', function(req, res, next){
     Client.findOne({
         where: {
-            firstName: req.body.firstName, 
-            lastName: req.body.lastName, 
-            DOB: req.body.DOB,  
+            firstName: req.body.firstName,
+            lastName: req.body.lastName,
+            DOB: req.body.DOB,
         }
     })
     .then(function(person){
-        person.update()
+        return person.update({
+            firstName: req.body.firstName,
+            lastName: req.body.lastName,
+            SSN: req.body.SSN,
+            DOB: req.body.DOB,
+            gender: req.body.gender,
+            race: req.body.race,
+            veteranStatus: req.body.veteranStatus,
+            phone: req.body.phone
+        })
+    })
+    .then(function(updatedPerson){
+        res.send(updatedPerson);
     })
 })

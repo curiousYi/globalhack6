@@ -1,11 +1,15 @@
 <div>
 	<form ng-submit="updatingInfo()">
+		<h3 ng-show="needsPut">It looks like we already have them in the database. Please verify the information below and update as necessary.</h3>
+		<h3 ng-show="needsPost">It looks like we don't have them in the database. Please fill out the information below and submit so we can add them.</h3>
 		<label for="firstName">First Name: </label>
 		<input type="text" ng-model="currentPerson.firstName">
 		<label for="lastName">Last Name: </label>
 		<input type="text" ng-model="currentPerson.lastName">
 		<label for="DOB">DOB: </label>
 		<input type="text" ng-model="currentPerson.DOB">
+		<label for="SSN">SSN: </label>
+		<input type="text" ng-model="currentPerson.SSN">
 		<label for="gender">gender: </label>
 		<select ng-init="currentPerson.gender" ng-model="currentPerson.gender">
 			<option value="0">F</option>
@@ -35,6 +39,6 @@
 
 		<label for="phone">phone: </label>
 		<input type="text" ng-model="currentPerson.phone">
-		<button>Submit Client's info</button>
+		<button>Next step</button>
 	</form>
 </div>
