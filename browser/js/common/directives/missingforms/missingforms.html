@@ -1,4 +1,5 @@
 <div>
+<<<<<<< HEAD
 	<h2 ng-show="currentPerson.hasSSC && currentPerson.hasBC">Looks like they're not missing any forms!</h2>
 	<h2 ng-show="!currentPerson.hasSSC || !currentPerson.hasBC">Looks like they're missing the below forms:</h2>
 	<ul>
@@ -6,3 +7,18 @@
 		<li ng-click="getSCC()" ng-hide=currentPerson.hasSSC>Social Security Form</li>
 	</ul>
 </div>
+=======
+	<div class='box-wrapper'>
+		<div class='box-content'>
+			<h4 class='box-subtitle' ng-show="updatedPerson.hasSSC && updatedPerson.hasBC">Looks like they're not missing any forms!</h4>
+			<h4 class='box-subtitle' ng-show="!updatedPerson.hasSSC || !updatedPerson.hasBC">Looks like they're missing the below forms:</h4>
+			<ul class='unord-list'>
+				<li class='list-item' ng-hide="updatedPerson.hasBC">Birth Certificate Form</li>
+				<li class='list-item' ng-hide="updatedPerson.hasSSC">Social Security Form</li>
+			</ul>
+
+			<button type="submit" class="btn btn-success submit-btn" ng-click='startForms'>Next step</button>
+		</div>
+	</div>
+</div>
+>>>>>>> master

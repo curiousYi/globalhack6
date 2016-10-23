@@ -3,7 +3,7 @@
 }
 
 body {
-  background: #fdfdfd;
+  background: white;
 }
 
 @mixin clearfix {
@@ -15,8 +15,21 @@ body {
 }
 
 #main {
-  padding-top: 60px;
+  padding-top: 1%;
   margin: 0 auto;
+}
+
+.angular-google-map-container { height: 550px; }
+
+.mapPage{
+  margin-top: 25px;
+}
+
+.formsPage{
+	margin: 2% 10%;
+}
+.formsPage li:hover{
+  cursor: pointer;
 }
 
 @import 'directives/main';
@@ -24,3 +37,4 @@ body {
 @import 'about/main';
 @import 'tutorial/main';
 @import 'login/main';
+@import 'getStarted/main';

@@ -38,6 +38,8 @@ app.controller('StartCtrl', function($scope, $http){
                 $scope.updatedPerson = person.data;
             })
         }
+
+        $('html,body').animate({scrollTop: $(document).height() }, 1000);
     };
 
     $scope.checkDB = function(person){
@@ -58,9 +60,11 @@ app.controller('StartCtrl', function($scope, $http){
             $scope.isCurrentPerson = true;
             $scope.showForms = true;
         })
+        .then(function(){
+            $('html,body').animate({scrollTop: $(document).height() }, 1000);
+        })
         .catch(function(error){
             console.error("ERR", error)
         })
     }
-
 })
