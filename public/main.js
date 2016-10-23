@@ -1,6 +1,6 @@
 'use strict';
 
-window.app = angular.module('FullstackGeneratedApp', ['fsaPreBuilt', 'ui.router', 'ui.bootstrap', 'ngAnimate']);
+window.app = angular.module('FullstackGeneratedApp', ['fsaPreBuilt', 'ui.router', 'ui.bootstrap', 'ngAnimate', 'uiGmapgoogle-maps']);
 
 app.config(function ($urlRouterProvider, $locationProvider) {
     // This turns off hashbang urls (/#about) and changes it to something normal (/about)
@@ -78,14 +78,14 @@ app.controller('AboutController', function ($scope, FullstackPics) {
 });
 
 app.config(function ($stateProvider) {
-    $stateProvider.state('docs', {
-        url: '/governmentforms',
-        templateUrl: 'js/docs/docs.html',
-        controller: 'FormController'
+    $stateProvider.state('formlist', {
+        url: '/govforms',
+        templateUrl: 'js/formlist/formlist.html',
+        controller: 'FormCtrl'
     });
 });
 
-app.controller('FormController', function ($scope, $http) {
+app.controller('FormCtrl', function ($scope, $http) {
     $scope.getCert = function () {
         $http.get('/api/forms/birth-certificate', { responseType: 'arraybuffer' }).success(function (data) {
             var file = new Blob([data], { type: 'application/pdf' });
@@ -108,14 +108,14 @@ app.controller('FormController', function ($scope, $http) {
 });
 
 app.config(function ($stateProvider) {
-    $stateProvider.state('formlist', {
-        url: '/govforms',
-        templateUrl: 'js/formlist/formlist.html',
-        controller: 'FormCtrl'
+    $stateProvider.state('docs', {
+        url: '/governmentforms',
+        templateUrl: 'js/docs/docs.html',
+        controller: 'FormController'
     });
 });
 
-app.controller('FormCtrl', function ($scope, $http) {
+app.controller('FormController', function ($scope, $http) {
     $scope.getCert = function () {
         $http.get('/api/forms/birth-certificate', { responseType: 'arraybuffer' }).success(function (data) {
             var file = new Blob([data], { type: 'application/pdf' });
@@ -328,6 +328,41 @@ app.controller('StartCtrl', function ($scope, $http) {
 });
 
 app.config(function ($stateProvider) {
+
+    $stateProvider.state('jobsMap', {
+        url: '/jobs-map',
+        templateUrl: './js/googleMaps/googleMaps.html',
+        controller: 'jobsMapCtrl'
+    });
+});
+
+app.controller('jobsMapCtrl', function ($scope) {
+    $scope.map = { center: { latitude: 38.627, longitude: -90.197 }, zoom: 12 };
+});
+// app.factory('SecretStash', function ($http) {
+
+//     var getStash = function () {
+//         return $http.get('/api/members/secret-stash').then(function (response) {
+//             return response.data;
+//         });
+//     };
+
+//     return {
+//         getStash: getStash
+//     };
+
+// });
+
+
+app.config(function (uiGmapGoogleMapApiProvider) {
+    uiGmapGoogleMapApiProvider.configure({
+        key: 'AIzaSyAdN3TfE13kxOFBRcgOQiRSsSs1_TFly8s',
+        v: '3.20', //defaults to latest 3.X anyhow
+        libraries: 'weather,geometry,visualization'
+    });
+});
+
+app.config(function ($stateProvider) {
     $stateProvider.state('home', {
         url: '/',
         templateUrl: 'js/home/home.html'
@@ -443,7 +478,7 @@ app.directive('navbar', function ($rootScope, AuthService, AUTH_EVENTS, $state) 
         templateUrl: 'js/common/directives/navbar/navbar.html',
         link: function link(scope) {
 
-            scope.items = [{ label: 'Home', state: 'home' }, { label: 'About', state: 'about' }, { label: 'Form List', state: 'formlist' }, { label: 'Get Started', state: 'start' }, { label: 'Members Only', state: 'membersOnly', auth: true }];
+            scope.items = [{ label: 'Home', state: 'home' }, { label: 'About', state: 'about' }, { label: 'Form List', state: 'formlist' }, { label: 'Get Started', state: 'start' }, { label: 'Members Only', state: 'membersOnly', auth: true }, { label: 'Jobs Map', state: 'jobsMap' }];
 
             scope.user = null;
 
