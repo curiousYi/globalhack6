@@ -14,11 +14,85 @@ app.config(function ($stateProvider) {
 });
 
 
-app.controller( 'jobsMapCtrl', function($scope, jobLocsFactory, jobs){
+app.controller('jobsMapCtrl', function($scope, jobLocsFactory, jobs, uiGmapGoogleMapApi, $http){
+    $scope.jobs = jobs; 
     var idCounter = 0;
     $scope.infoWindowArrays = [];
 
-     angular.extend($scope, {
+    $scope.addNewJob = function(){
+        var infoWindowsArrays = $scope.infoWindowArrays;
+
+        return $http.post('/api/jobLocs', $scope.job)
+        .then(function(job){
+            console.log('here is new job', job)
+            $scope.jobs.push(job.data)
+            var newInfoWindow = new google.maps.InfoWindow({
+                content: '<div id="content"> <b>'+
+                'Name of Employer: </b>' + job.data.employer +
+            '</div>'+'<div ><b>'+
+                'Description: </b>' + job.data.description +
+            '</div>'+'<div > <b>'+
+                'Industry: </b>' + job.data.industry +
+            '</div>'
+            ,
+                maxWidth: 200
+            })
+            infoWindowsArrays.push(newInfoWindow)
+            var marker = {
+                id: idCounter,
+                coords: {
+                    latitude: job.data.latitude,
+                    longitude: job.data.longitude
+                },
+                markerEvents: {
+                    click: function (marker, eventName, model, originalEventArgs) {
+                        infoWindowsArrays[model.idKey].open(model.map,marker);
+                    }
+                },
+            };
+            $scope.map.markers.push(marker);
+            idCounter++;
+            return marker;
+        })
+        .then(function(marker){
+            console.log('NEW MARKER', marker)
+            console.log('jobs', $scope.jobs)
+            markerInit($scope.jobs, idCounter, $scope);
+        })
+
+    }
+
+    // var events = {
+    //     places_changed: function (searchBox) {
+    //         console.log('is this undefined', searchBox)
+    //         var place = searchBox.getPlaces();
+    //         if (!place || place == 'undefined' || place.length == 0) {
+    //             console.log('no place data :(');
+    //             return;
+    //         }
+
+    //         $scope.map = {
+    //             "center": {
+    //                 "latitude": place[0].geometry.location.lat(),
+    //                 "longitude": place[0].geometry.location.lng()
+    //             },
+    //             "zoom": 18
+    //         };
+
+    //         $scope.marker = {
+    //             id: 0,
+    //             coords: {
+    //                 latitude: place[0].geometry.location.lat(),
+    //                 longitude: place[0].geometry.location.lng()
+    //             }
+    //         };
+    //     }
+    // };
+    // $scope.searchbox = { template: 'searchbox.tpl.html', events: events };
+
+    // console.log('EVENTS?', $scope.searchbox)
+
+    angular.extend($scope, {
         map: {
             center: {
                 latitude: 38.627,
@@ -46,13 +120,12 @@ app.controller( 'jobsMapCtrl', function($scope, jobLocsFactory, jobs){
                     // $scope.map.markers.push(marker);
                 }
             }
-        }
+        },
     });
 
-    markerInit(jobs, idCounter, $scope);
+    markerInit($scope.jobs, idCounter, $scope);
 
     function markerInit (jobs, idCounter, $scope) {
-        console.log('heres the $scope', $scope);
         var infoWindowsArrays = $scope.infoWindowArrays;
 
         jobs.forEach(job => {
@@ -67,7 +140,6 @@ app.controller( 'jobsMapCtrl', function($scope, jobLocsFactory, jobs){
             ,
                 maxWidth: 200
             })
-            // console.log('heres the var infoWindowsArrays ', infoWindowsArrays)
             infoWindowsArrays.push(newInfoWindow)
 
             var marker = {
@@ -78,29 +150,20 @@ app.controller( 'jobsMapCtrl', function($scope, jobLocsFactory, jobs){
                 },
                 markerEvents: {
                     click: function (marker, eventName, model, originalEventArgs) {
-                        // console.log('hey there');
-                        console.log('heres infoWindowArrays ,', infoWindowsArrays[model.idKey])
+                        // console.log('heres infoWindowArrays ,', infoWindowsArrays[model.idKey])
                         infoWindowsArrays[model.idKey].open(model.map,marker);
-                        console.log('Marker was clicked', marker)
-                        console.log('heres this ', this)
-                        console.log('eventName', eventName)
-                        console.log('model', model)
-                        console.log('originalEventArgs', originalEventArgs)
-                        console.log('heres the var infoWindowsArrays click event in marker', infoWindowsArrays)
+                        // console.log('Marker was clicked', marker)
+                        // console.log('heres this ', this)
+                        // console.log('eventName', eventName)
+                        // console.log('model', model)
+                        // console.log('originalEventArgs', originalEventArgs)
+                        // console.log('heres the var infoWindowsArrays click event in marker', infoWindowsArrays)
                     }
                 },
-                // infowindow: new google.maps.InfoWindow({
-                //     content: 'Hey there',
-                //     maxWidth: 200
-                // })
             };
             $scope.map.markers.push(marker);
             idCounter++;
         })
-    }
-
-    $scope.seeInfo = function(marker){
-        console.log('here is the marker you clicked', marker)
     }
 
 })
@@ -118,20 +181,6 @@ app.factory('jobLocsFactory', function($http){
     }
     return jobLocsFactory;
 })
-// app.factory('SecretStash', function ($http) {
-
-//     var getStash = function () {
-//         return $http.get('/api/members/secret-stash').then(function (response) {
-//             return response.data;
-//         });
-//     };
-
-//     return {
-//         getStash: getStash
-//     };
-
-// });
-
 
 app.config(function(uiGmapGoogleMapApiProvider) {
     uiGmapGoogleMapApiProvider.configure({
