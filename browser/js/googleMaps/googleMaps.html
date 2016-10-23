@@ -9,4 +9,27 @@
               events = "m.markerEvents">
           </ui-gmap-marker>
     </ui-gmap-google-map>
+
+    <div class='add-job'>
+
+      <div class='form-group'>
+        <form ng-submit="addNewJob()">
+          <h4 class='box-subtitle'>Add a new job posting</h4>
+
+          <label for="employer">Employer: </label>
+            <input type="text" class="form-control" ng-model="job.employer">
+          <label for="description">Description: </label>
+            <input type="text" class="form-control" ng-model="job.description">
+          <label for="industry">Industry: </label>
+            <input type="text" class="form-control" ng-model="job.industry">
+          <label for="latitude">Latitude: </label>
+            <input type="text" class="form-control" ng-model="job.latitude">
+          <label for="longitude">Longitude: </label>
+            <input type="text" class="form-control" ng-model="job.longitude">
+          
+          <button type='submit' class="btn btn-success submit-btn">Add</button>
+        </form>
+      </div>
+
+    </div>
 </div>
