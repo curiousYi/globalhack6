@@ -9,9 +9,9 @@ app.config(function ($stateProvider) {
 
 });
 
-app.controller('AboutController', function ($scope, FullstackPics) {
+app.controller('AboutController', function ($scope, Pics) {
 
     // Images of beautiful Fullstack people.
-    $scope.images = _.shuffle(FullstackPics);
+    $scope.images = _.shuffle(Pics);
 
 });
