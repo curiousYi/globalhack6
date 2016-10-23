@@ -15,7 +15,7 @@ var ensureAuthenticated = function (req, res, next) {
     }
 };
 
-router.get('/indiv', ensureAuthenticated, function (req, res, next) {
+router.get('/', ensureAuthenticated, function (req, res, next) {
     Client.findOne({
         where: {
             firstName: req.query.firstName, 
@@ -24,8 +24,38 @@ router.get('/indiv', ensureAuthenticated, function (req, res, next) {
         }
     })
     .then(function(client){
-        console.log('here is client info', client)
         res.send(client);
     })
     .catch(next);
 });
+
+router.post('/', function(req, res, next){
+    Client.create({
+        where: {
+            firstName: req.body.firstName, 
+            lastName: req.body.lastName, 
+            SSN: req.body.SSN,
+            DOB: req.body.DOB,
+            gender: req.body.gender,
+            race: req.body.race,
+            veteranStatus: req.body.veteranStatus,
+            phone: req.body.phone 
+        }
+    })
+    .then(function(person){
+        res.send(person)
+    })
+})
+
+router.put('/', function(req, res, next){
+    Client.findOne({
+        where: {
+            firstName: req.body.firstName, 
+            lastName: req.body.lastName, 
+            DOB: req.body.DOB,  
+        }
+    })
+    .then(function(person){
+        person.update()
+    })
+})
