@@ -1,8 +1,8 @@
 <div>
-	<h2 ng-show="updatedPerson.hasSSC && updatedPerson.hasBC">Looks like they're not missing any forms!</h2>
-	<h2 ng-show="!updatedPerson.hasSSC || !updatedPerson.hasBC">Looks like they're missing the below forms:</h2>
+	<h2 ng-show="currentPerson.hasSSC && currentPerson.hasBC">Looks like they're not missing any forms!</h2>
+	<h2 ng-show="!currentPerson.hasSSC || !currentPerson.hasBC">Looks like they're missing the below forms:</h2>
 	<ul>
-		<li ng-hide="updatedPerson.hasBC">Birth Certificate Form</li>
-		<li ng-hide="updatedPerson.hasSSC">Social Security Form</li>
+		<li ng-click="getBC()" >Birth Certificate Form</li>
+		<li ng-click="getSCC()" ng-hide=currentPerson.hasSSC>Social Security Form</li>
 	</ul>
 </div>

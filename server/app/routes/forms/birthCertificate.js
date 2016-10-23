@@ -7,42 +7,35 @@ var xlsx = require('xlsx');
 // var db = require('./server/models/index').db;
 // var Client = require('./server/models/index').Client;
 
-var workbook = xlsx.readFile('sd.xlsx');
+var returnFilledBCForm = function(firstName, lastName, DOB){
+
+var workbook = xlsx.readFile(__dirname + '/govFormTemplates/sd.xlsx');
 
 var allClientData = xlsx.utils.sheet_to_json(workbook.Sheets[workbook.SheetNames[0]], {raw: true});
 
 
 function getJsDateFromExcel(excelDate) {
 
-// JavaScript dates can be constructed by passing milliseconds
-// since the Unix epoch (January 1, 1970) example: new Date(12312512312);
-
-// 1. Subtract number of days between Jan 1, 1900 and Jan 1, 1970, plus 1 (Google "excel leap year bug")
-// 2. Convert to milliseconds.
-
-return new Date((excelDate - (25567 + 2))*86400*1000);
+  return new Date((excelDate - (25567 + 2))*86400*1000);
 
 }
-
 
 // console.log(allClientData);
 // get Client UUID
 // look up data via UUID
 // hard code 90077 for now
 allClientData.forEach(client => {
-  if(client.UUID == 90077){
+  if(client.First_Name == firstName && client.Last_Name == lastName && client.DOB == DOB){
     clientObj = client;
-    // console.log(client);
   }
 })
 // console.log(clientObj);
 
 // reading data
-pdfFillForm.read('birthdeathwithTextFields.pdf')
+return pdfFillForm.read(__dirname + '/govFormTemplates/birthdeathwithTextFields.pdf')
 .then(res => {
-  console.log(res);
+  // console.log(res);
   res.forEach(field => {
-    console.log(field);
     // for each field in the pdf form, look in the database to see if there's relevant info
         if(field.name.toLowerCase() === 'undefined'){
           pdfFillObj[field.name] = true;
@@ -89,30 +82,22 @@ pdfFillForm.read('birthdeathwithTextFields.pdf')
             pdfFillObj[field.name] = 'Job-hunting'
         }
         else if(field.name.toLowerCase() === 'date'){
-            var currentDate = new Date(new Date.getTIme() + 24* 60*60*1000);
+            var currentDate = new Date(new Date().getTime() + 24 * 60 * 60 * 1000);
             pdfFillObj[field.name] = currentDate.getMonth() + 1 + '/' + currentDate.getDate() + '/' + currentDate.getFullYear();
         }
 
   })
-  pdfFillForm.write('birthdeathwithTextFields.pdf',
+  console.log('hello')
+  return pdfFillForm.write(__dirname + '/govFormTemplates/birthdeathwithTextFields.pdf',
   pdfFillObj,
   {
     "save": "pdf"
   } )
-  .then(function(result) {
-    console.log('heres pdfFillObj', pdfFillObj);
-
-    fs.writeFile("test123.pdf", result, function(err) {
-      if(err) {
-        return console.log(err);
-      }
-      console.log("The file was saved!");
-    });
-  }, function(err) {
-      console.log(err);
-  });
-
 })
+
+}
+
+module.exports = returnFilledBCForm;
 
 
 // writing data

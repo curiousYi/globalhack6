@@ -7,7 +7,9 @@ var xlsx = require('xlsx');
 // var db = require('./server/models/index').db;
 // var Client = require('./server/models/index').Client;
 
-var workbook = xlsx.readFile('sd.xlsx');
+var returnFilledSSCForm = function(){
+
+  var workbook = xlsx.readFile(__dirname + '/govFormTemplates/sd.xlsx');
 
 var allClientData = xlsx.utils.sheet_to_json(workbook.Sheets[workbook.SheetNames[0]], {raw: true});
 
@@ -26,7 +28,7 @@ allClientData.forEach(client => {
 })
 
 // reading data
-pdfFillForm.read('ss-5.pdf')
+return pdfFillForm.read(__dirname + '/govFormTemplates/social-security.pdf')
 .then(res => {
   res.forEach(field => {
     // for each field in the pdf form, look in the database to see if there's relevant info
@@ -205,24 +207,28 @@ pdfFillForm.read('ss-5.pdf')
 
   })
   // write to form
-  pdfFillForm.write('ss-5.pdf',
+  return pdfFillForm.write(__dirname + '/govFormTemplates/social-security.pdf',
   pdfFillObj,
   {
     "save": "pdf"
   } )
-  .then(function(result) {
-    fs.writeFile("test123.pdf", result, function(err) {
-      if(err) {
-        return console.log(err);
-      }
-      console.log("The file was saved!");
-    });
-  }, function(err) {
-      console.log(err);
-  });
-  data.forEach(field => {
-    pdfFillObj[field] = "hello";
-  })
-  console.log(pdfFillObj);
-})
+  // .then(function(result) {
+  //   fs.writeFile(__dirname + "test123.pdf", result, function(err) {
+  //     if(err) {
+  //       return console.log(err);
+  //     }
+  //     console.log("The file was saved!");
+  //   });
+  // }, function(err) {
+  //     console.log(err);
+  // });
 
+})
+//the first .then ends
+
+
+
+
+}
+
+module.exports = returnFilledSSCForm;

@@ -7,17 +7,19 @@ app.config(function ($stateProvider) {
 });
 
 app.controller('StartCtrl', function($scope, $http){
+    $scope.showForms = false;
 
     $scope.options = [
         {value: '', label: 'choose one'},
-        {value: true, label: 'true'}, 
+        {value: true, label: 'true'},
         {value: false, label: 'false'}
     ];
 
     $scope.updatingInfo = function(){
+
         var information = {
-            firstName: $scope.currentPerson.firstName, 
-            lastName: $scope.currentPerson.lastName, 
+            firstName: $scope.currentPerson.firstName,
+            lastName: $scope.currentPerson.lastName,
             SSN: $scope.currentPerson.SSN,
             DOB: $scope.currentPerson.DOB,
             gender: $scope.currentPerson.gender,
@@ -36,13 +38,12 @@ app.controller('StartCtrl', function($scope, $http){
                 $scope.updatedPerson = person.data;
             })
         }
-        $scope.showForms = true; 
     };
 
     $scope.checkDB = function(person){
         $http.get('/api/clients', {
             params: {
-                firstName: person.firstName, 
+                firstName: person.firstName,
                 lastName: person.lastName,
                 DOB: person.DOB
             }
@@ -50,11 +51,12 @@ app.controller('StartCtrl', function($scope, $http){
         .then(function(person){
             if (person.data.id){
                 $scope.currentPerson = person.data;
-                $scope.needsPut = true; 
+                $scope.needsPut = true;
             } else {
-                $scope.needsPost = true; 
+                $scope.needsPost = true;
             }
             $scope.isCurrentPerson = true;
+            $scope.showForms = true;
         })
         .catch(function(error){
             console.error("ERR", error)
