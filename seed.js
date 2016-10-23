@@ -25,6 +25,8 @@ var chalk = require('chalk');
 var db = require('./server/db');
 var User = db.model('user');
 var Client = db.model('client');
+var JobLocs = db.model('jobLoc');
+
 var Promise = require('sequelize').Promise;
 
 var seedUsers = function () {
@@ -76,12 +78,51 @@ var seedClients = function () {
 
 };
 
+
+var seedJobs = function () {
+
+    var jobs = [
+        {
+            employer: 'Popeyes Louisiana Chicken',
+            description: 'Cashier position needs to be fulfilled within a month',
+            industry: 'restaurant',
+            latitude: 38.661139,
+            longitude: -90.216048,
+        },
+        {
+            employer: 'St. Louis Public Library',
+            description: 'Need someone to organize books',
+            industry: 'education',
+            latitude: 38.667472,
+            longitude: -90.211773,
+        },
+        {
+            employer: 'OReily Auto Shop',
+            description: 'Manual laborer needed',
+            industry: 'auto',
+            latitude: 38.669365,
+            longitude: -90.235661,
+        },
+    ];
+
+    var creatingJobs = jobs.map(function (jobObj) {
+        return JobLocs.create(jobObj);
+    });
+
+    return Promise.all(creatingJobs);
+
+};
+
+
 db.sync({ force: true })
     .then(function () {
         return seedUsers();
     })
     .then(function () {
         return seedClients();
+    })
+    .then(function () {
+        return seedJobs();
     })
     .then(function () {
         console.log(chalk.green('Seed successful!'));

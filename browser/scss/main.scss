@@ -19,7 +19,14 @@ body {
   margin: 0 auto;
 }
 
-.angular-google-map-container { height: 550px; }
+.angular-google-map-container {
+    height: 550px;
+    width: 100%;
+    display: block;
+    float: left;
+}
+
+
 
 .mapPage{
   margin-top: 25px;
