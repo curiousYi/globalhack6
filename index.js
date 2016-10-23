@@ -117,11 +117,6 @@ pdfFillForm.read('ss-5.pdf')
         pdfFillObj[field.name] = clientObj.Birth_State
       }
     }
-    else if(field.name.toLowerCase().search(/(?=.*state)(?=.*birth)/) > -1){
-      if(clientObj.Birth_State){
-        pdfFillObj[field.name] = clientObj.Birth_State
-      }
-    }
     else if(field.name.toLowerCase().search(/(?=.*date)(?=.*time)/) > -1){
       if(clientObj.DOB){
         // console.log(clientObj.DOB, typeof clientObj.DOB)
