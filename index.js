@@ -115,12 +115,8 @@ pdfFillForm.read('ss-5.pdf')
         pdfFillObj[field.name] = clientObj.Birth_State
       }
     }
-    else if(field.name.toLowerCase().search(/(?=.*state)(?=.*birth)/) > -1){
-      if(clientObj.Birth_State){
-        pdfFillObj[field.name] = clientObj.Birth_State
-      }
-    }
     else if(field.name.toLowerCase().search(/(?=.*date)(?=.*timefield1)/) > -1){
+
       if(clientObj.DOB){
         // console.log(clientObj.DOB, typeof clientObj.DOB)
         var clientDOB = new Date(getJsDateFromExcel(clientObj.DOB)).toISOString()

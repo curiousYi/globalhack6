@@ -1,12 +1,12 @@
 app.config(function ($stateProvider) {
-    $stateProvider.state('docs', {
-        url: '/governmentforms',
-        templateUrl: 'js/docs/docs.html',
-        controller: 'FormController'
+    $stateProvider.state('formlist', {
+        url: '/govforms',
+        templateUrl: 'js/formlist/formlist.html',
+        controller: 'FormCtrl'
     });
 });
 
-app.controller('FormController', function($scope, $http){
+app.controller('FormCtrl', function($scope, $http){
     $scope.getCert = function(){
         $http.get('/api/forms/birth-certificate', {responseType: 'arraybuffer'})
         .success(function(data){
