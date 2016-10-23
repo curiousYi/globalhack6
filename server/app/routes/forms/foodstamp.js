@@ -23,19 +23,20 @@ function getJsDateFromExcel(excelDate) {
 // look up data via UUID
 // hard code 90077 for now
 allClientData.forEach(client => {
-  if(client.UUID == 91501){
+  if(client.First_Name == First_Name && client.Last_Name == Last_Name){
     clientObj = client;
   }
 })
+console.log(clientObj);
 allIncomeData.forEach(item => {
-  if(item.PersonalID == 91501){
+  if(item.PersonalID == clientObj.UUID){
     if(item.InformationDate > incomeObj.InformationDate){
       incomeObj = item;
     }
   }
 })
 allDisabilities.forEach(client => {
-  if(client.PersonalID == 91501){
+  if(client.PersonalID == clientObj.UUID){
     disabilitiesArr.push(client);
   }
 })
