@@ -21,6 +21,13 @@ body {
 
 .angular-google-map-container { height: 550px; }
 
+.formsPage{
+	margin: 2% 10%;
+}
+.formsPage li:hover{
+  cursor: pointer;
+}
+
 @import 'directives/main';
 @import 'home/main';
 @import 'about/main';
