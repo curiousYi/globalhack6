@@ -3,7 +3,7 @@
 }
 
 body {
-  background: #fdfdfd;
+  background: white;
 }
 
 @mixin clearfix {
@@ -20,6 +20,10 @@ body {
 }
 
 .angular-google-map-container { height: 550px; }
+
+.mapPage{
+  margin-top: 25px;
+}
 
 .formsPage{
 	margin: 2% 10%;
