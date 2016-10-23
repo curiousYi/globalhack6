@@ -1,15 +1,24 @@
 <div>
-    <h2>Let's get started:</h2>
-    <form ng-submit="checkDB(person)">What is the client's name and DOB?
-        <label for="firstName">First Name: </label>
-        <input type="text" ng-model="person.firstName">
-        <label for="lastName">Last Name: </label>
-        <input type="text" ng-model="person.lastName">
-        <label for="DOB">DOB: </label>
-        <input type="text" ng-model="person.DOB">
-        <button type="submit">Check if they're already in the system</button>
-    </form>
+    <div id="scrollable-thing">
+        <div class='box-wrapper'>
+            <div class='box-content'>
+                <h2 class='box-title'>Let's get started:</h2>
+                <h4 class='box-subtitle'>What is the client's name and DOB?</h4>
+                <div class='form-group'>
+                    <form ng-submit="checkDB(person)">
+                        <label for="firstName">First Name: </label>
+                        <input type="text" class="form-control" ng-model="person.firstName">
+                        <label for="lastName">Last Name: </label>
+                        <input type="text" class="form-control" ng-model="person.lastName">
+                        <label for="DOB">DOB: </label>
+                        <input type="text" class="form-control" ng-model="person.DOB">
+                        <button type="submit" class="btn btn-success submit-btn">Check if they're already in the system</button>
+                    </form> 
+                </div>
+            </div>
+        </div>
 
-    <basicinfo ng-show="isCurrentPerson"></basicinfo>
-    <missingforms ng-show="showForms"></missingforms>
+        <basicinfo ng-show="isCurrentPerson"></basicinfo>
+        <missingforms ng-show="showForms"></missingforms>
+    </div>
 </div>

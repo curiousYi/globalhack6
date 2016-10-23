@@ -1,7 +1,7 @@
 {
-  "name": "FullstackGeneratedApp",
+  "name": "Forward",
   "version": "1.0.0",
-  "description": "A generated project at Fullstack Academy",
+  "description": "An app that streamline applications for job documents for the homeless",
   "main": "server/start.js",
   "scripts": {
     "start": "nodemon --watch server -e js,html server/start.js",
