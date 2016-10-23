@@ -35,7 +35,7 @@ allClientData.forEach(client => {
     // console.log(client);
   }
 })
-console.log(clientObj);
+// console.log(clientObj);
 
 // reading data
 pdfFillForm.read('birthdeathwithTextFields.pdf')
@@ -92,111 +92,6 @@ pdfFillForm.read('birthdeathwithTextFields.pdf')
             var currentDate = new Date(new Date.getTIme() + 24* 60*60*1000);
             pdfFillObj[field.name] = currentDate.getMonth() + 1 + '/' + currentDate.getDate() + '/' + currentDate.getFullYear();
         }
-
-
-     // if(field.name.toLowerCase().search(/(?=.*mother)(?=.*first)(?=.*name)/) > -1){
-    //   if(clientObj.Mother_First_Name){
-    //     pdfFillObj[field.name] = clientObj.Mother_First_Name
-    //   }
-    // }
-    // else if(field.name.toLowerCase().search(/(?=.*mother)(?=.*middle)(?=.*name)/) > -1){
-    //   if(clientObj.Mother_Middle_Name){
-    //     pdfFillObj[field.name] = clientObj.Mother_Middle_Name
-    //   }
-    // }
-    // else if(field.name.toLowerCase().search(/(?=.*mother)(?=.*last)(?=.*name)/) > -1){
-    //   if(clientObj.Mother_Last_Name){
-    //     pdfFillObj[field.name] = clientObj.Mother_Last_Name
-    //   }
-    // }
-    // else if(field.name.toLowerCase().search(/(?=.*father)(?=.*first)(?=.*name)/) > -1){
-    //   if(clientObj.Father_First_Name){
-    //     pdfFillObj[field.name] = clientObj.Father_First_Name
-    //   }
-    // }
-    // else if(field.name.toLowerCase().search(/(?=.*father)(?=.*middle)(?=.*name)/) > -1){
-    //   if(clientObj.Father_Middle_Name){
-    //     pdfFillObj[field.name] = clientObj.Father_Middle_Name
-    //   }
-    // }
-    // else if(field.name.toLowerCase().search(/(?=.*father)(?=.*last)(?=.*name)/) > -1){
-    //   if(clientObj.Father_Last_Name){
-    //     pdfFillObj[field.name] = clientObj.Father_Last_Name
-    //   }
-    // }
-    // else if(field.name.toLowerCase().search(/(?=.*first)(?=.*diff)(?=.*name)/) > -1){
-    //   if(clientObj.First_Name){
-    //     pdfFillObj[field.name] = clientObj.First_Diff_Name
-    //   }
-    // }
-    // else if(field.name.toLowerCase().search(/(?=.*middle)(?=.*diff)(?=.*name)/) > -1){
-    //   if(clientObj.Middle_Name){
-    //     pdfFillObj[field.name] = clientObj.Middle_Diff_Name
-    //   }
-    // }
-    // else if(field.name.toLowerCase().search(/(?=.*last)(?=.*diff)(?=.*name)/) > -1){
-    //   if(clientObj.Last_Name){
-    //     pdfFillObj[field.name] = clientObj.Last_Diff_Name
-    //   }
-    // }
-    // else if(field.name.toLowerCase().search(/(?=.*first)(?=.*name)/) > -1){
-    //   if(clientObj.First_Name){
-    //     pdfFillObj[field.name] = clientObj.First_Name
-    //   }
-    // }
-    // else if(field.name.toLowerCase().search(/(?=.*middle)(?=.*name)/) > -1){
-    //   if(clientObj.Middle_Name){
-    //     pdfFillObj[field.name] = clientObj.Middle_Name
-    //   }
-    // }
-    // else if(field.name.toLowerCase().search(/(?=.*last)(?=.*name)/) > -1){
-    //   if(clientObj.Last_Name){
-    //     pdfFillObj[field.name] = clientObj.Last_Name
-    //   }
-    // }
-    // else if(field.name.toLowerCase().search(/(?=.*city)(?=.*birth)/) > -1){
-    //   if(clientObj.Birth_City){
-    //     pdfFillObj[field.name] = clientObj.Birth_City
-    //   }
-    // }
-    // else if(field.name.toLowerCase().search(/(?=.*state)(?=.*birth)/) > -1){
-    //   if(clientObj.Birth_State){
-    //     pdfFillObj[field.name] = clientObj.Birth_State
-    //   }
-    // }
-    // else if(field.name.toLowerCase().search(/(?=.*state)(?=.*birth)/) > -1){
-    //   if(clientObj.Birth_State){
-    //     pdfFillObj[field.name] = clientObj.Birth_State
-    //   }
-    // }
-    // else if(field.name.toLowerCase().search(/(?=.*date)(?=.*time)/) > -1){
-    //   if(clientObj.DOB){
-    //     // console.log(clientObj.DOB, typeof clientObj.DOB)
-    //     var clientDOB = new Date(getJsDateFromExcel(clientObj.DOB)).toISOString()
-    //     // getJsDateFromExcel(clientObj.DOB)
-    //     pdfFillObj[field.name] = clientDOB.slice(5, 7) + '/' + clientDOB.slice(8, 10) +  '/' + clientDOB.slice(0, 4) ;
-    //   }
-    // }
-    // else if(clientObj.SSNDataQuality === 1 && field.name.toLowerCase().search(/(?=.*oldssnxxx\[0\])/) > -1){
-    //     pdfFillObj[field.name] = clientObj.SSN.slice(0,3)
-    // }
-    // else if(clientObj.SSNDataQuality === 1 && field.name.toLowerCase().search(/(?=.*oldssnxx\[0\])/) > -1){
-    //     pdfFillObj[field.name] = clientObj.SSN.slice(3,5);
-
-    // }
-    // else if(clientObj.SSNDataQuality === 1 && field.name.toLowerCase().search(/(?=.*oldssnxxxx\[0\])/) > -1){
-    //   pdfFillObj[field.name] = clientObj.SSN.slice(5,9)
-
-    // }
-    // else if(clientObj.SSNDataQuality === 1 && field.name.toLowerCase().search(/(?=.*TextFieldName18\[0\])/) > -1){
-    //   pdfFillObj[field.name] = 'RTZYPI'
-
-    // }
-    // else if(field.name.toLowerCase().search(/(?=.*gender\[0\])/) > -1){
-    //   pdfFillObj[field.name] = true;
-    // }
-
-    // console.log(pdfFillObj);
 
   })
   pdfFillForm.write('birthdeathwithTextFields.pdf',
