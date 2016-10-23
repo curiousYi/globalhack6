@@ -1,0 +1,40 @@
+<div>
+	<form ng-submit="updatingInfo()">
+		<label for="firstName">First Name: </label>
+		<input type="text" ng-model="currentPerson.firstName">
+		<label for="lastName">Last Name: </label>
+		<input type="text" ng-model="currentPerson.lastName">
+		<label for="DOB">DOB: </label>
+		<input type="text" ng-model="currentPerson.DOB">
+		<label for="gender">gender: </label>
+		<select ng-init="currentPerson.gender" ng-model="currentPerson.gender">
+			<option value="0">F</option>
+			<option value="1">M</option>
+			<option value="2">Trans - M to F</option>
+			<option value="3">Trans - F to M</option>
+			<option value="4">I don't identify with these</option>
+			<option value="8">I don't know</option>
+			<option value="9">Don't wish to tell</option>
+		</select>
+
+
+		<label for="race">race: </label>
+		<select ng-init="currentPerson.race" ng-model="currentPerson.race">
+			<option value='1'>American Indian/Alaskan Native</option>
+			<option value='2'>Asian</option>
+			<option value='3'>Black or African American</option>
+			<option value='4'>Native Hawaiian or Pacific Islander</option>
+			<option value='5'>White</option>
+			<option value='8'>I don't know</option>
+			<option value='9'>I don't wish to tell</option>
+		</select>
+
+
+		<label for="veteranStatus">veteranStatus: </label>
+		<select ng-model="currentPerson.veteranStatus" ng-options="o.value as o.label for o in options"></select>
+
+		<label for="phone">phone: </label>
+		<input type="text" ng-model="currentPerson.phone">
+		<button>Submit Client's info</button>
+	</form>
+</div>
