@@ -1,14 +1,12 @@
 <div>
     <ui-gmap-google-map center='map.center' zoom='map.zoom' draggable="true" events="map.events">
-          <ui-gmap-marker ng-repeat="m in map.markers"
-          coords="m.coords"
-          icon="m.icon"
-          options="m.option"
-          idkey="m.id"></ui-gmap-marker>
+          <ui-gmap-marker
+              ng-repeat="m in map.markers"
+              coords="m.coords"
+              icon="m.icon"
+              options="m.option"
+              idkey="m.id"
+              events = "m.markerEvents">
+          </ui-gmap-marker>
     </ui-gmap-google-map>
-
-    <div class='info-box'>
-
-    </div>
-
 </div>
