@@ -57,7 +57,7 @@ router.get('/birth-certificate/complete', ensureAuthenticated, function(req, res
 router.get('/social-security/complete', ensureAuthenticated, function(req, res, next){
     console.log(req.query);
 
-    sc().then(function(result){
+    sc(req.query.firstname, req.query.lastname, req.query.DOB).then(function(result){
         console.log('hello');
         return fs.writeFile(__dirname + "test123.pdf", result, function(err) {
           if(err) {
@@ -82,7 +82,7 @@ router.get('/social-security/complete', ensureAuthenticated, function(req, res, 
 router.get('/food-stamps/complete', ensureAuthenticated, function(req, res, next){
     console.log(req.query);
 
-    foodStamps().then(function(result){
+    foodStamps(req.query.firstname, req.query.lastname, req.query.DOB).then(function(result){
         return fs.writeFile(__dirname + "foodStampsComplete.pdf", result, function(err) {
           if(err) {
             return console.log(err);
