@@ -3,15 +3,71 @@ app.config(function ($stateProvider) {
     $stateProvider.state('jobsMap', {
         url: '/jobs-map',
         templateUrl: './js/googleMaps/googleMaps.html',
-        controller: 'jobsMapCtrl'
+        controller: 'jobsMapCtrl',
+        resolve: {
+            jobs: function(jobLocsFactory){
+                return jobLocsFactory.getJobs();
+            },
+        }
     });
 
 });
 
 
-app.controller( 'jobsMapCtrl', function($scope){
-    $scope.map = { center: { latitude: 38.627, longitude: -90.197 }, zoom: 12 };
+app.controller( 'jobsMapCtrl', function($scope, jobLocsFactory, jobs){
+     angular.extend($scope, {
+        map: {
+            center: {
+                latitude: 38.627,
+                longitude:-90.197
+            },
+            zoom: 12,
+            markers: [],
+            events: {
+                click: function (map, eventName, originalEventArgs) {
+                    var e = originalEventArgs[0];
+                    var lat = e.latLng.lat(),lon = e.latLng.lng();
+                    var marker = {
+                        id: Date.now(),
+                        coords: {
+                            latitude: lat,
+                            longitude: lon
+                        },
+                    };
+                    $scope.map.markers.push(marker);
+                }
+            }
+        }
+    });
 
+    markerInit(jobs);
+
+    function markerInit (jobs) {
+        jobs.forEach(job => {
+            var marker = {
+                id: Date.now(),
+                coords: {
+                    latitude: job.latitude,
+                    longitude: job.longitude
+                },
+            };
+            $scope.map.markers.push(marker);
+        })
+    }
+})
+
+app.factory('jobLocsFactory', function($http){
+    var jobLocsFactory = {};
+
+    jobLocsFactory.getJobs = function(){
+        return $http.get('/api/jobLocs')
+        .then(res => res.data)
+    }
+
+    jobLocsFactory.postNewJob = function(){
+        return $http.post('/api/jobLocs')
+    }
+    return jobLocsFactory;
 })
 // app.factory('SecretStash', function ($http) {
 

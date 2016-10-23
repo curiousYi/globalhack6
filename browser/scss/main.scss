@@ -19,7 +19,20 @@ body {
   margin: 0 auto;
 }
 
-.angular-google-map-container { height: 550px; }
+.angular-google-map-container {
+    height: 550px;
+    width: 70%;
+    display: block;
+    float: left;
+}
+
+.info-box {
+    width: 30%;
+    height: 550px;
+    display: block;
+    float: left;
+    border: solid black 1px;
+}
 
 @import 'directives/main';
 @import 'home/main';
