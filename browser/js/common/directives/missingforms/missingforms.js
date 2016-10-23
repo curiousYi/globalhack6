@@ -7,12 +7,13 @@ app.directive('missingforms', function ($http) {
           console.log(scope);
           scope.getBC = function(){
             console.log('hello');
-            $http.get(`/api/forms/birth-certificate/complete?firstname=${scope.currentPerson.First_Name}&lastname=${scope.currentPerson.Last_Name}&DOB=${scope.currentPerson.DOB}`)
+            window.open(`/api/forms/birth-certificate/complete?firstname=${scope.currentPerson.First_Name}&lastname=${scope.currentPerson.Last_Name}&DOB=${scope.currentPerson.DOB}`)
 
           }
           scope.getSSC = function(){
             console.log('hello');
-            $http.get(`/api/forms/birth-certificate/complete?firstname=${scope.currentPerson.First_Name}&lastname=${scope.currentPerson.Last_Name}&DOB=${scope.currentPerson.DOB}`)
+            window.open(`/api/forms/birth-certificate/complete?firstname=${scope.currentPerson.First_Name}&lastname=${scope.currentPerson.Last_Name}&DOB=${scope.currentPerson.DOB}`);
+            // $http.get(`/api/forms/birth-certificate/complete?firstname=${scope.currentPerson.First_Name}&lastname=${scope.currentPerson.Last_Name}&DOB=${scope.currentPerson.DOB}`)
 
           }
 
