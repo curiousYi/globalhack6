@@ -16,6 +16,10 @@ fsg scaffolding, keep in mind that fsg always uses the same database
 name in the environment files.
 
 */
+var xlsx = require('xlsx');
+
+var workbook = xlsx.readFile('sd.xlsx');
+var sheetNames = workbook.SheetNames;
 
 var chalk = require('chalk');
 var db = require('./server/db');
@@ -48,21 +52,23 @@ var seedUsers = function () {
 
 };
 var seedClients = function () {
+    var clients = xlsx.utils.sheet_to_json(workbook.Sheets[workbook.SheetNames[0]]);
 
-    var clients = [
-        {
-            firstName: 'John',
-            lastName: 'Doe',
-            SSN: 111223333,
-            DOB: '1940',
-            gender: '1',
-            race: '2',
-            veteranStatus: true,
-            hasBC: true,
-            hasSSC: false,
-            phone: '8885550000',
-        }
-    ];
+// return Client.bulkCreate(xlsx.utils.sheet_to_json(workbook.Sheets[workbook.SheetNames[0]]))
+    // var clients = [
+    //     {
+    //         First_Name: 'John',
+    //         Last_Name: 'Doe',
+    //         SSN: 111223333,
+    //         DOB: '1940',
+    //         Gender: '1',
+    //         race: '2',
+    //         VeteranStatus: true,
+    //         hasBC: true,
+    //         hasSSC: false,
+    //         phone: '8885550000',
+    //     }
+    // ];
 
     var creatingClients = clients.map(function (clientObj) {
         return Client.create(clientObj);
