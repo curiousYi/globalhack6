@@ -1,0 +1,41 @@
+.box-wrapper {
+	border: solid #DADADA 1px;
+	border-radius: 10px;
+	margin: 30px;
+	min-height:70vh;
+}
+
+.box-content {
+	padding: 10%;
+}
+
+.box-title {
+	margin: auto;
+	text-align: center;
+	padding: 10px;
+}
+
+.box-subtitle {
+	margin: auto;
+	text-align: center;
+	padding: 10px;
+}
+
+.form-group {
+	margin: 20px;
+}
+
+.submit-btn {
+	margin: 20px auto;
+	width: 50%;
+	display: block;
+}
+
+.unord-list {
+	padding-left: 0;
+}
+
+.list-item {
+	text-align: center; 
+	list-style-type: none; 
+}
