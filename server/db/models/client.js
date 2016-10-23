@@ -28,10 +28,12 @@ module.exports = db.define('client', {
         type: Sequelize.BOOLEAN
     },
     hasBC: {
-        type: Sequelize.BOOLEAN
+        type: Sequelize.BOOLEAN, 
+        defaultValue: false
     },
     hasSSC: {
-        type: Sequelize.BOOLEAN
+        type: Sequelize.BOOLEAN,
+        defaultValue: false
     },
     phone: {
         type: Sequelize.STRING
