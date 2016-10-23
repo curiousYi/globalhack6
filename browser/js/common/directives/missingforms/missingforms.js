@@ -13,7 +13,11 @@ app.directive('missingforms', function ($http) {
           scope.getSSC = function(){
             console.log('hello');
             window.open(`/api/forms/birth-certificate/complete?firstname=${scope.currentPerson.First_Name}&lastname=${scope.currentPerson.Last_Name}&DOB=${scope.currentPerson.DOB}`);
-            // $http.get(`/api/forms/birth-certificate/complete?firstname=${scope.currentPerson.First_Name}&lastname=${scope.currentPerson.Last_Name}&DOB=${scope.currentPerson.DOB}`)
+
+
+          }
+          scope.getFS = function(){
+            window.open(`/api/forms/food-stamps/complete?firstname=${scope.currentPerson.First_Name}&lastname=${scope.currentPerson.Last_Name}&DOB=${scope.currentPerson.DOB}`);
 
           }
 

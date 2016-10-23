@@ -8,8 +8,8 @@ var disabilitiesArr = [];
 // var db = require('./server/models/index').db;
 // var Client = require('./server/models/index').Client;
 
-const workbook = xlsx.readFile('sd.xlsx');
-
+var returnFoodStampsForm = function(First_Name, Last_Name, DOB){
+  var workbook = xlsx.readFile(__dirname + '/govFormTemplates/sd.xlsx');
 const allClientData = xlsx.utils.sheet_to_json(workbook.Sheets[workbook.SheetNames[0]], {raw: true});
 const allIncomeData = xlsx.utils.sheet_to_json(workbook.Sheets[workbook.SheetNames[7]], {raw: true});
 const allDisabilities = xlsx.utils.sheet_to_json(workbook.Sheets[workbook.SheetNames[1]], {raw: true});
@@ -41,7 +41,7 @@ allDisabilities.forEach(client => {
 })
 
 // reading data
-pdfFillForm.read('foodstamp.pdf')
+return pdfFillForm.read(__dirname + '/govFormTemplates/foodstamp.pdf')
 .then(res => {
   res.forEach(field => {
     console.log(field.name);
@@ -213,24 +213,14 @@ pdfFillForm.read('foodstamp.pdf')
 
   })
   // write to form
-  pdfFillForm.write('foodstamp.pdf',
+  return pdfFillForm.write(__dirname + '/govFormTemplates/foodstamp.pdf',
   pdfFillObj,
   {
     "save": "pdf"
   } )
-  .then(function(result) {
-    fs.writeFile("test123.pdf", result, function(err) {
-      if(err) {
-        return console.log(err);
-      }
-      console.log("The file was saved!");
-    });
-  }, function(err) {
-      console.log(err);
-  });
-  data.forEach(field => {
-    pdfFillObj[field] = "hello";
+
   })
-  console.log(pdfFillObj);
-})
+}
+module.exports = returnFoodStampsForm;
+
 
