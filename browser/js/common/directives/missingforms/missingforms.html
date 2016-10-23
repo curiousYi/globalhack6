@@ -1,11 +1,13 @@
 <div>
+
 	<div class='box-wrapper'>
 		<div class='box-content'>
 			<h4 class='box-subtitle' ng-show="updatedPerson.hasSSC && updatedPerson.hasBC">Looks like they're not missing any forms!</h4>
 			<h4 class='box-subtitle' ng-show="!updatedPerson.hasSSC || !updatedPerson.hasBC">Looks like they're missing the below forms:</h4>
 			<ul class='unord-list'>
-				<li class='list-item' ng-hide="updatedPerson.hasBC">Birth Certificate Form</li>
-				<li class='list-item' ng-hide="updatedPerson.hasSSC">Social Security Form</li>
+				<li class='list-item' ng-click="getBC()" ng-hide="updatedPerson.hasBC">Birth Certificate Form</li>
+				<li class='list-item' ng-click="getSSC()" ng-hide="updatedPerson.hasSSC">Social Security Form</li>
+        <li class='list-item' ng-click="getFS()" ng-hide="updatedPerson.hasFS">Food Stamps Form</li>
 			</ul>
 
 			<button type="submit" class="btn btn-success submit-btn" ng-click='startForms'>Next step</button>
